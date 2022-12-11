@@ -1,0 +1,30 @@
+# This file sets up the resources required for the stack to run
+service: castlabs-shoestore-backend
+
+provider:
+  name: aws
+  runtime: python3.9
+  lambdaHashingVersion: 20201221
+  region: us-east-1
+  apiGateway:
+    shouldStartNameWithService: true
+
+
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
+
+resources:
+  Outputs:
+    RestApiId:
+      Value:
+        Ref: ApiGatewayRestApi
+      Export:
+        Name: ${self:service}-RestApiId
+    # RestApi Root Resource (the implicit '/' path)
+    RootResourceId:
+      Value:
+        Fn::GetAtt: ApiGatewayRestApi.RootResourceId
+      Export:
+        Name: ${self:service}-RootResourceId

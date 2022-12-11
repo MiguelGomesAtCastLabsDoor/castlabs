@@ -1,0 +1,37 @@
+# shoes.yml
+
+# This will be unique for every service
+service: castlabs-shoes
+
+provider:
+  name: aws
+  lambdaHashingVersion: 20201221
+  tracing:
+    lambda: true
+  runtime: python3.9
+  region: us-east-1
+  iam:
+    role: arn:aws:iam::124239755002:role/lambdaRole
+  apiGateway:
+    restApiId:
+        Fn::ImportValue: ${self:service}-RestApiId
+    restApiRootResourceId:
+        Fn::ImportValue: ${self:service}-RootResourceId
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
+
+
+functions:
+  list_shoes:
+    handler: shoes/handlers.list_shoes_handler
+    events:
+      - http:
+          path: /shoes
+          method: get
+  get_shoe:
+    handler: shoes/handlers.get_shoe_handler
+    events:
+      - http:
+          path: /shoes/{shoe_id}
+          method: get
