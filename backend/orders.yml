@@ -35,3 +35,9 @@ functions:
       - http:
           path: /orders/{order_id}
           method: get
+  create_order:
+    handler: orders/handlers.create_order_handler
+    events:
+      - http:
+          path: /orders
+          method: put
