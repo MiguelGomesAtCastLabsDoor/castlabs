@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { orderAPI } from './orderAPI';
-import { Order } from './Order';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { orderAPI } from "./orderAPI";
+import { Order } from "./Order";
+import { useParams } from "react-router-dom";
 
 function OrderPage(props: any) {
   const [loading, setLoading] = useState(false);

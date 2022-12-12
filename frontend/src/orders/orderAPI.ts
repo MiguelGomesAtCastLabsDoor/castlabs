@@ -1,15 +1,15 @@
-import { Order } from './Order';
-const baseUrl = 'http://localhost:4000';
+import { Order } from "./Order";
+const baseUrl = "http://localhost:4000";
 const url = `${baseUrl}/orders`;
 
 function translateStatusToErrorMessage(status: number) {
   switch (status) {
     case 401:
-      return 'Please login again.';
+      return "Please login again.";
     case 403:
-      return 'You do not have permission to view the order(s).';
+      return "You do not have permission to view the order(s).";
     default:
-      return 'There was an error retrieving the order(s). Please try again.';
+      return "There was an error retrieving the order(s). Please try again.";
   }
 }
 
@@ -56,20 +56,20 @@ const orderAPI = {
       .then(parseJSON)
       .then(convertToOrderModel);
   },
-   put(order: Order) {
+  put(order: Order) {
     return fetch(`${url}/${order.id}`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(order),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     })
       .then(checkStatus)
       .then(parseJSON)
-        .catch((error: TypeError) => {
-        console.log('log client error ' + error);
+      .catch((error: TypeError) => {
+        console.log("log client error " + error);
         throw new Error(
-          'There was an error updating the order. Please try again.'
+          "There was an error updating the order. Please try again."
         );
       });
   },
@@ -79,9 +79,9 @@ const orderAPI = {
       .then(parseJSON)
       .then(convertToOrderModels)
       .catch((error: TypeError) => {
-        console.log('log client error ' + error);
+        console.log("log client error " + error);
         throw new Error(
-          'There was an error retrieving the orders. Please try again.'
+          "There was an error retrieving the orders. Please try again."
         );
       });
   },

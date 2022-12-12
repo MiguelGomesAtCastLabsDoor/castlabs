@@ -1,18 +1,18 @@
-import React, { SyntheticEvent, useState } from 'react';
-import { Order } from './Order';
+import React, { SyntheticEvent, useState } from "react";
+import { Order } from "./Order";
 
 interface OrderFormProps {
-    order: Order;
-    onSave: (order: Order) => void;
-   onCancel: () => void;
- }
+  order: Order;
+  onSave: (order: Order) => void;
+  onCancel: () => void;
+}
 function OrderForm({ order: initialOrder, onSave, onCancel }: OrderFormProps) {
-    const [order, setOrder] = useState(initialOrder);
-     const [errors, setErrors] = useState({
-     userId: '',
-     shippingAddress: '',
- });
-     const handleSubmit = (event: SyntheticEvent) => {
+  const [order, setOrder] = useState(initialOrder);
+  const [errors, setErrors] = useState({
+    userId: "",
+    shippingAddress: "",
+  });
+  const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     if (!isValid()) return;
     onSave(order);
@@ -21,10 +21,10 @@ function OrderForm({ order: initialOrder, onSave, onCancel }: OrderFormProps) {
     const { type, name, value, checked } = event.target;
     // if input type is checkbox use checked
     // otherwise it's type is text, number etc. so use value
-    let updatedValue = type === 'checkbox' ? checked : value;
+    let updatedValue = type === "checkbox" ? checked : value;
 
     //if input type is number convert the updatedValue string to a +number
-    if (type === 'number') {
+    if (type === "number") {
       updatedValue = Number(updatedValue);
     }
     const change = {
@@ -43,43 +43,48 @@ function OrderForm({ order: initialOrder, onSave, onCancel }: OrderFormProps) {
     });
     setErrors(() => validate(updatedOrder));
   };
-    function validate(order: Order) {
-    let errors: any = { userId: '', shippingAddress: '' };
+  function validate(order: Order) {
+    let errors: any = { userId: "", shippingAddress: "" };
     if (order.userId.length === 0) {
-      errors.userId = 'User Id is required';
+      errors.userId = "User Id is required";
     }
     if (order.shippingAddress.length > 0 && order.shippingAddress.length < 3) {
-      errors.shippingAddress = 'Shipping Address needs to be at least 3 characters.';
+      errors.shippingAddress =
+        "Shipping Address needs to be at least 3 characters.";
     }
 
     return errors;
   }
   function isValid() {
-    return (
-      errors.userId.length === 0 &&
-     errors.shippingAddress.length === 0
-    );
+    return errors.userId.length === 0 && errors.shippingAddress.length === 0;
   }
   return (
     <form className="input-group vertical" onSubmit={handleSubmit}>
       <label htmlFor="userId">Order Brand</label>
-      <input type="text" name="userId" placeholder="enter userId" value={order.userId}
-       onChange={handleChange}/>
-        {errors.userId.length > 0 && (
+      <input
+        type="text"
+        name="userId"
+        placeholder="enter userId"
+        value={order.userId}
+        onChange={handleChange}
+      />
+      {errors.userId.length > 0 && (
         <div className="card error">
           <p>{errors.userId}</p>
         </div>
       )}
       <label htmlFor="shippingAddress">Order Display Name</label>
-      <textarea name="shippingAddress" placeholder="enter shipping Address " value={order.shippingAddress}
-       onChange={handleChange}/>
-        {errors.shippingAddress.length > 0 && (
+      <textarea
+        name="shippingAddress"
+        placeholder="enter shipping Address "
+        value={order.shippingAddress}
+        onChange={handleChange}
+      />
+      {errors.shippingAddress.length > 0 && (
         <div className="card error">
           <p>{errors.shippingAddress}</p>
         </div>
       )}
-
-
 
       <div className="input-group">
         <button className="primary bordered medium">Save</button>

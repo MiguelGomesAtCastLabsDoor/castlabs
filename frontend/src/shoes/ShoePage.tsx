@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { shoeAPI } from './shoeAPI';
-import ShoeDetail from './ShoeDetail';
-import { Shoe } from './Shoe';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { shoeAPI } from "./shoeAPI";
+import ShoeDetail from "./ShoeDetail";
+import { Shoe } from "./Shoe";
+import { useParams } from "react-router-dom";
 
 function ShoePage(props: any) {
   const [loading, setLoading] = useState(false);

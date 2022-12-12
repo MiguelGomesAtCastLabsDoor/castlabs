@@ -1,5 +1,5 @@
-import React from 'react';
-import { Shoe } from './Shoe';
+import React from "react";
+import { Shoe } from "./Shoe";
 
 interface ShoeDetailProps {
   shoe: Shoe;
@@ -9,11 +9,7 @@ export default function ShoeDetail({ shoe }: ShoeDetailProps) {
     <div className="row">
       <div className="col-sm-6">
         <div className="card large">
-          <img
-            className="rounded"
-            src={shoe.image}
-            alt={shoe.friendlyName}
-          />
+          <img className="rounded" src={shoe.image} alt={shoe.friendlyName} />
           <section className="section dark">
             <h3 className="strong">
               <strong>{shoe.brand}</strong>

@@ -8,18 +8,18 @@ interface ShoeListProps {
   onSave: (shoe: Shoe) => void;
 }
 
-function ShoeList({ shoes,onSave }: ShoeListProps) {
+function ShoeList({ shoes, onSave }: ShoeListProps) {
   const [shoeBeingOrdered, setShoeBeingOrdered] = useState({});
   const handleOrdering = (shoe: Shoe) => {
     setShoeBeingOrdered(shoe);
   };
-    const cancelOrdering = () => {
+  const cancelOrdering = () => {
     setShoeBeingOrdered({});
   };
   const items = shoes.map((shoe) => (
     <div key={shoe.id} className="cols-sm">
-    {shoe === shoeBeingOrdered ? (
-        <ShoeForm shoe={shoe} onSave={onSave} onCancel={cancelOrdering}/>
+      {shoe === shoeBeingOrdered ? (
+        <ShoeForm shoe={shoe} onSave={onSave} onCancel={cancelOrdering} />
       ) : (
         <ShoeCard shoe={shoe} onOrdering={handleOrdering} />
       )}

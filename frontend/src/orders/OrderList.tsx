@@ -8,18 +8,18 @@ interface OrderListProps {
   onSave: (order: Order) => void;
 }
 
-function OrderList({ orders,onSave }: OrderListProps) {
+function OrderList({ orders, onSave }: OrderListProps) {
   const [orderBeingOrdered, setOrderBeingOrdered] = useState({});
   const handleOrdering = (order: Order) => {
     setOrderBeingOrdered(order);
   };
-    const cancelOrdering = () => {
+  const cancelOrdering = () => {
     setOrderBeingOrdered({});
   };
   const items = orders.map((order) => (
     <div key={order.id} className="cols-sm">
-    {order === orderBeingOrdered ? (
-        <OrderForm order={order} onSave={onSave} onCancel={cancelOrdering}/>
+      {order === orderBeingOrdered ? (
+        <OrderForm order={order} onSave={onSave} onCancel={cancelOrdering} />
       ) : (
         <OrderCard order={order} onOrdering={handleOrdering} />
       )}

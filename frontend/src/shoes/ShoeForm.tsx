@@ -1,19 +1,19 @@
-import React, { SyntheticEvent, useState } from 'react';
-import { Shoe } from './Shoe';
+import React, { SyntheticEvent, useState } from "react";
+import { Shoe } from "./Shoe";
 
 interface ShoeFormProps {
-    shoe: Shoe;
-    onSave: (shoe: Shoe) => void;
-   onCancel: () => void;
- }
+  shoe: Shoe;
+  onSave: (shoe: Shoe) => void;
+  onCancel: () => void;
+}
 function ShoeForm({ shoe: initialShoe, onSave, onCancel }: ShoeFormProps) {
-    const [shoe, setShoe] = useState(initialShoe);
-     const [errors, setErrors] = useState({
-     brand: '',
-     friendlyName: '',
-     price: '',
- });
-     const handleSubmit = (event: SyntheticEvent) => {
+  const [shoe, setShoe] = useState(initialShoe);
+  const [errors, setErrors] = useState({
+    brand: "",
+    friendlyName: "",
+    price: "",
+  });
+  const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     if (!isValid()) return;
     onSave(shoe);
@@ -22,10 +22,10 @@ function ShoeForm({ shoe: initialShoe, onSave, onCancel }: ShoeFormProps) {
     const { type, name, value, checked } = event.target;
     // if input type is checkbox use checked
     // otherwise it's type is text, number etc. so use value
-    let updatedValue = type === 'checkbox' ? checked : value;
+    let updatedValue = type === "checkbox" ? checked : value;
 
     //if input type is number convert the updatedValue string to a +number
-    if (type === 'number') {
+    if (type === "number") {
       updatedValue = Number(updatedValue);
     }
     const change = {
@@ -44,56 +44,69 @@ function ShoeForm({ shoe: initialShoe, onSave, onCancel }: ShoeFormProps) {
     });
     setErrors(() => validate(updatedShoe));
   };
-    function validate(shoe: Shoe) {
-    let errors: any = { brand: '', friendlyName: '', price: '' };
+  function validate(shoe: Shoe) {
+    let errors: any = { brand: "", friendlyName: "", price: "" };
     if (shoe.brand.length === 0) {
-      errors.brand = 'Brand is required';
+      errors.brand = "Brand is required";
     }
     if (shoe.brand.length > 0 && shoe.brand.length < 3) {
-      errors.brand = 'Brand needs to be at least 3 characters.';
+      errors.brand = "Brand needs to be at least 3 characters.";
     }
     if (shoe.friendlyName.length === 0) {
-      errors.friendlyName = 'Shoe display name is required.';
+      errors.friendlyName = "Shoe display name is required.";
     }
     if (shoe.price <= 0) {
-      errors.price = 'Price must be more than $0.';
+      errors.price = "Price must be more than $0.";
     }
     return errors;
   }
   function isValid() {
     return (
       errors.brand.length === 0 &&
-     errors.friendlyName.length === 0 &&
+      errors.friendlyName.length === 0 &&
       errors.price.length === 0
     );
   }
   return (
     <form className="input-group vertical" onSubmit={handleSubmit}>
       <label htmlFor="brand">Shoe Brand</label>
-      <input type="text" name="brand" placeholder="enter brand" value={shoe.brand}
-       onChange={handleChange}/>
-        {errors.brand.length > 0 && (
+      <input
+        type="text"
+        name="brand"
+        placeholder="enter brand"
+        value={shoe.brand}
+        onChange={handleChange}
+      />
+      {errors.brand.length > 0 && (
         <div className="card error">
           <p>{errors.brand}</p>
         </div>
       )}
       <label htmlFor="friendlyName">Shoe Display Name</label>
-      <textarea name="friendlyName" placeholder="enter display name" value={shoe.friendlyName}
-       onChange={handleChange}/>
-        {errors.friendlyName.length > 0 && (
+      <textarea
+        name="friendlyName"
+        placeholder="enter display name"
+        value={shoe.friendlyName}
+        onChange={handleChange}
+      />
+      {errors.friendlyName.length > 0 && (
         <div className="card error">
           <p>{errors.friendlyName}</p>
         </div>
       )}
       <label htmlFor="price">Shoe Price</label>
-      <input type="number" name="price" placeholder="enter price" value={shoe.price}
-       onChange={handleChange}/>
-        {errors.price.length > 0 && (
+      <input
+        type="number"
+        name="price"
+        placeholder="enter price"
+        value={shoe.price}
+        onChange={handleChange}
+      />
+      {errors.price.length > 0 && (
         <div className="card error">
           <p>{errors.price}</p>
         </div>
       )}
-
 
       <div className="input-group">
         <button className="primary bordered medium">Save</button>

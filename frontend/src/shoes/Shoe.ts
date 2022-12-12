@@ -3,7 +3,6 @@ interface Size {
   pairsInStock: number;
 }
 export class Shoe {
-
   id: number | undefined;
   brand: string = "";
   friendlyName: string = "";
@@ -21,7 +20,6 @@ export class Shoe {
     if (initializer.friendlyName) this.friendlyName = initializer.friendlyName;
     if (initializer.image) this.image = initializer.image;
     if (initializer.sizes) this.sizes = initializer.sizes;
-    if (initializer.price)
-      this.price = initializer.price;
+    if (initializer.price) this.price = initializer.price;
   }
 }
